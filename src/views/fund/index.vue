@@ -22,6 +22,9 @@
       <el-table-column
         prop="code"
         label="基金代码">
+        <template slot-scope="{row}">
+          <el-link type="primary" :href="`https://m.1234567.com.cn/index.html?page=jjxq&code=${row.code}`" target="_blank">{{row.code}}</el-link>
+        </template>
       </el-table-column>
       <el-table-column
         sortable="custom"

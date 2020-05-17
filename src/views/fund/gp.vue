@@ -4,7 +4,7 @@
       <el-col :span="12">
       </el-col>
       <el-col :span="12" style="text-align: right;">
-        <el-input placeholder="股票名称/股票代码" v-model.trim="query.keyword" clearable @clear="search" size="mini" style="width: 480px;">
+        <el-input placeholder="股票名称/股票代码" v-model.trim="query.keyword" clearable @clear="search" size="mini" style="width: 240px;">
           <el-button slot="append" icon="el-icon-search" @click="search">搜索</el-button>
         </el-input>
       </el-col>
@@ -19,6 +19,9 @@
       <el-table-column
         prop="code"
         label="股票代码">
+        <template slot-scope="{row}">
+          <el-link type="primary" :href="`https://emwap.eastmoney.com/quota/hq/stock?id=${row.code}&mk=${row.code[0] == '6' ? 1 : 0}`" target="_blank">{{row.code}}</el-link>
+        </template>
       </el-table-column>
       <el-table-column
         prop="count"
@@ -47,7 +50,9 @@
       :visible.sync="dialogVisible"
       width="60%">
       <el-table
-        :data="item">
+        :data="item"
+        show-summary
+        :summary-method="getSummaries">
         <el-table-column
           label="基金名称"
           prop="name">
@@ -101,6 +106,29 @@ export default {
     this.getList()
   },
   methods: {
+    getSummaries(param) {
+      const { columns, data } = param;
+      console.log(data)
+      const sums = [];
+      columns.forEach((column, index) => {
+        if (index === 0) {
+          sums[index] = '合计';
+          return;
+        }
+        if (index === 1) {
+          sums[index] = '';
+          return;
+        }
+        if (index === 2) {
+          const values = data.map(item => Number(item.markval))
+          let count = values.reduce((a, b) => {
+            return a + b
+          }, 0)
+          sums[index] = (count / 100000000).toFixed(3) + '亿'
+        }
+      });
+      return sums;
+    },
     handleShowDetail(item) {
       this.item = item.lists
       this.dialogVisible = true
