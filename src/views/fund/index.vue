@@ -65,6 +65,9 @@
         <el-table-column
           label="股票代码"
           prop="code">
+          <template slot-scope="{row}">
+            <el-link type="primary" :href="`https://emwap.eastmoney.com/quota/hq/stock?id=${row.code}&mk=${row.code[0] == '6' ? 1 : 0}`" target="_blank">{{row.code}}</el-link>
+          </template>
         </el-table-column>
         <el-table-column
           label="持有市值"
