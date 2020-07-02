@@ -60,6 +60,9 @@
         <el-table-column
           label="基金代码"
           prop="code">
+          <template slot-scope="{row}">
+            <el-link type="primary" :href="`https://m.1234567.com.cn/index.html?page=jjxq&code=${row.code}`" target="_blank">{{row.code}}</el-link>
+          </template>
         </el-table-column>
         <el-table-column
           label="持有市值"
