@@ -93,7 +93,9 @@ export default {
       }).then(res => {
         // this.total = res.total
         this.tableData = res.data
-        this.setChart(res.data)
+        if(res.data.length) {
+          this.setChart(res.data)
+        }
       }).finally(() => {
         this.loading = false
       })
