@@ -2,6 +2,7 @@ export default {
   route: {
     fund: '基金列表',
     gp: '股票列表',
+    chart: '图表',
     dashboard: '首页'
   },
   navbar: {
