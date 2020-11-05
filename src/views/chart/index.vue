@@ -139,7 +139,8 @@ export default {
             return {
               name: item.name,
               type: 'line',
-              data: item.datas
+              smooth: true,
+              data: item.datas,
             }
           }),
       })
