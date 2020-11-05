@@ -102,42 +102,46 @@ export default {
     },
     setChart(data) {
       this.echarts.setOption({
-        // title: {
-        //   text: '折线图堆叠'
-        // },
-      tooltip: {
-          trigger: 'axis'
-      },
-      legend: {
-          data: data.map(item => item.name)
-      },
-      grid: {
-          left: '3%',
-          right: '4%',
-          bottom: '3%',
-          containLabel: true
-      },
-      toolbox: {
-          feature: {
-              saveAsImage: {}
-          }
-      },
-      xAxis: {
-          type: 'category',
-          boundaryGap: false,
-          data: data[0].dates
-      },
-      yAxis: {
-          type: 'value'
-      },
-      series: data.map(item => {
-        return {
-          name: item.name,
-          type: 'line',
-          stack: '排名',
-          data: item.datas
-        }
-      }),
+          title: {
+              text: '走势图',
+              subtext: '日赚百万'
+          },
+          tooltip: {
+              trigger: 'axis'
+          },
+          legend: {
+              data: data.map(item => item.name)
+          },
+          toolbox: {
+              show: true,
+              feature: {
+                  dataZoom: {
+                      yAxisIndex: 'none'
+                  },
+                  dataView: {readOnly: false},
+                  magicType: {type: ['line', 'bar']},
+                  restore: {},
+                  saveAsImage: {}
+              }
+          },
+          xAxis: {
+              type: 'category',
+              boundaryGap: false,
+              data: data[0].dates
+          },
+          yAxis: {
+              type: 'value',
+              axisLabel: {
+                  formatter: '{value}'
+              }
+          },
+          series: data.map(item => {
+            return {
+              name: item.name,
+              type: 'line',
+              data: item.datas
+            }
+          }),
       })
     }
   }
