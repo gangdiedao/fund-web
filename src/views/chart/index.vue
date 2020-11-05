@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-row style="margin-bottom: 15px;" type="flex" class="row-bg" justify="space-between">
-      <el-col :span="12">
+      <el-col :span="24">
         <el-input
           type="textarea"
           :rows="2"
@@ -20,7 +20,7 @@
         <el-date-picker
           v-model="formData.date"
           type="date"
-          value-format="yyyy-mm-dd"
+          value-format="yyyy-MM-dd"
           placeholder="选择日期">
         </el-date-picker>
         <el-button type="primary" size="mini" @click="handleAdd" :loading="btnloading">添加</el-button>
